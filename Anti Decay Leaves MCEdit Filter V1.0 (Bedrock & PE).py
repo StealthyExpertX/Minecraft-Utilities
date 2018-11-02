@@ -22,7 +22,7 @@ inputs = (
 	("Birch: ", False),
 	("Spruce: ", False),
 	("Jungle: ", False),
-	("Acaica: ", False),
+	("Acacia: ", False),
 	("Dark Oak: ", False),
 )
 
