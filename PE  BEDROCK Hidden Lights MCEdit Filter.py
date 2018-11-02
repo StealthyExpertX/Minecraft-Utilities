@@ -1,104 +1,114 @@
-#Hidden Lights MCEdit Filter created by StealthyExpertX , @RedstonerLabs , StealthyExpertX#8940
-#Note this filter only works correctly in PE/BEDROCK worlds,saves,maps.
+#note this filter only works correctly in PE/BEDROCK worlds, saves, maps.
 
-#You may use this filter and the code how ever you wish.
+#feel free to use this filter however you wish. 
+#follow me at @RedstonerLabs and my team Builders Horizon at @TheMCBuildTeam.
 
-#user inputs / GUI / settings
+#big credits to gentlegiantJGC, gentlegiantJGC#9219 for his fast block access.
+
+#version 1.1
+
+#python imports
+import time
+import numpy as np
+
+#display_name
+displayName = "PE BEDROCK Hidden Lights MCEdit Filter v1.1"
+
+#user_inputs
 inputs = (
-    ("Hidden Lights MCEdit Filter", "label"),
-    ("This filter finds and converts blocks to hidden light sources", "label"),
-    ("Glow Stone: ", False),
-    ("Sea Lantern: ", False),
-    ("Torch: ", False),
-    ("Redstone Torch: ", False),
-    ("Redstone Lamp: ", False),
-    ("Beacon: ", False),
-    ("Fire: ", False),
-    ("Jack o'Lantern: ", False),
-    ("End Rod: ", False),
-    ("Glowing Obsidian: ", False),
-    ("All: ", False),
-    )
+	("Hidden Lights MCEdit Filter V1.1", "label"),
+	("Finds and changes blocks to hidden light sources.", "label"),
+	("Glow Stone: ", False),
+	("Sea Lantern: ", False),
+	("Torch: ", False),
+	("Redstone Torch: ", False),
+	("Redstone Lamp: ", False),
+	("Beacon: ", False),
+	("Fire: ", False),
+	("Jack o'Lantern: ", False),
+	("End Rod: ", False),
+	("Glowing Obsidian: ", False),
+	("All: ", False),
+	("By StealthyExpertX - @RedstonerLabs", "label"),
+	)
 
-#sets invisible end rod block
-def setInvisibleBlock(level, x, y, z):
-
-    #set the block id 250
-    level.setBlockAt(x, y, z, 208)
-
-    #set the block damage 250
-    level.setBlockDataAt(x, y, z, 6)
-
-#getBlock method gets block id of block at x, y, z
-def getBlock(level, x, y, z):
-    return level.blockAt(x, y, z)
-
+#main preform
 def perform(level, box, options):
+	#start timer
+	start = time.time()
 
-    #empty list
-    idArray = []
+	#empty list.
+	blocks = []
 
-    #if all is true it will convert all valid block types
-    if options["All: "] == True:
+	#glowstone.
+	if options["Glow Stone: "]:
+		blocks.append(89)
 
-        #extend list items to check if blocks exist and if they do then convert them to invisible end rods.
-        idArray.extend([89, 169, 50, 76, 124, 138, 91, 208, 246, 51])
+	#sealantern.
+	if options["Sea Lantern: "]:
+		blocks.append(169)
 
-        #scan selection, x,y,z
-        for x in xrange(box.minx, box.maxx):
+	#torch.
+	if options["Torch: "]:
+		blocks.append(50)
 
-            for y in xrange(box.miny, box.maxy):
+	#redstonetorch.
+	if options["Redstone Torch: "]:
+		blocks.append(76)
 
-                for z in xrange(box.minz, box.maxz):
+	#redstonelamp.
+	if options["Redstone Lamp: "]:
+		blocks.append(124)
 
-                    #get block id and check if its in the idArray
-                    if getBlock(level, x, y, z) in idArray:
-                        #set invisible end rod 
-                        setInvisibleBlock(level, x, y, z, True)
+	#beacon.
+	if options["Beacon: "]:
+		blocks.append(138)
 
-    #if all is false it will only convert selected valid block types
-    else:
-        
-        #append list item to check if block exist and if it does convert it to invisible end rods.
-        if options["Glow Stone: "]:
-            idArray.append(89)
+	#jackolantern
+	if options["Jack o'Lantern: "]:
+		blocks.append(91)
 
-        if options["Sea Lantern: "]:
-            idArray.append(169)
+	#endrod.
+	if options["End Rod: "]:
+		blocks.append(208)
 
-        if options["Torch: "]:
-            idArray.append(50)
+	#glowingobsidian.
+	if options["Glowing Obsidian: "]:
+		blocks.append(246)
 
-        if options["Redstone Torch: "]:
-            idArray.append(76)
+	#fire.
+	if options["Fire: "]:
+		blocks.append(51)
 
-        if options["Redstone Lamp: "]:
-            idArray.append(124)
+	#all.
+	if options["All: "]:
+		blocks.extend([89, 169, 50, 76, 124, 138, 91, 208, 246, 51])
 
-        if options["Beacon: "]:
-            idArray.append(138)
+	#check if nothing was selected.
+	if len(blocks) == 0:
+		raise ValueError("No options were selected, please try again!")
 
-        if options["Jack o'Lantern: "]:
-            idArray.append(91)
+	#scan_selection box
+	for chunk, slices, _ in level.getChunkSlices(box):
 
-        if options["End Rod: "]:
-            idArray.append(208)
+		#id_values in_chunk
+		block = chunk.Blocks[slices]
 
-        if options["Glowing Obsidian: "]:
-            idArray.append(246)
+		#data_values in_chunk
+		data = chunk.Data[slices]
 
-        if options["Fire: "]:
-            idArray.append(51)
+		#find_ids from_list
+		for findblock in blocks:
 
-        #scan selection, x,y,z
-        for x in xrange(box.minx, box.maxx):
+			#block set_blockid
+			block[block == findblock] = 208
 
-            for y in xrange(box.miny, box.maxy):
+			#data set_datavalue
+			data[np.logical_and(block == findblock, True)] = 6
 
-                for z in xrange(box.minz, box.maxz):
+		#mark_chunks to_relight
+		chunk.dirty = True
 
-                    #get block id and check if its in the idArray
-                    if getBlock(level, x, y, z) in idArray:
-                    
-                        #set invisible end rod 
-                        setInvisibleBlock(level, x, y, z, False)
+	#end timer
+	end = time.time()
+	print "completion_time: " + str(end - start)
