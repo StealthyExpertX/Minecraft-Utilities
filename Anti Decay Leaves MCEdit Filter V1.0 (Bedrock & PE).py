@@ -58,7 +58,7 @@ def perform(level, box, options):
 		leaves[18] = 18
 
 	#acacia option
-	if options["Acaica: "]:
+	if options["Acacia: "]:
 		blocks[(0,4)] = 8
 		leaves[161] = 161
 
