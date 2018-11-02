@@ -4,18 +4,18 @@
 #Big credits to gentlegiantJGC, gentlegiantJGC#9219 for his fast chunk access with numpy.
 #data[np.logical_and(chunk.Blocks[slices] == block, chunk.Data[slices] == value)] = new_value
 
-#version_number 1.1
+#version_number 1.2
 
 #python imports
 import time
 import numpy as np
 
 #display_name
-displayName = "Anti Decay Leaves MCEdit Filter v1.1"
+displayName = "Anti Decay Leaves MCEdit Filter v1.2"
 
 #user_inputs
 inputs = (
-	("Anti Decay Leaves MCEdit Filter v1.1", "label"),
+	("Anti Decay Leaves MCEdit Filter v1.2", "label"),
 	("This filter fixes leaves that decay.", "label"),
 	("By StealthyExpertX - @RedstonerLabs", "label"),
 	("Oak: ", False),
