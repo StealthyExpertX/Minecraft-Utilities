@@ -14,7 +14,7 @@ displayName = "Anti Decay MCEdit Filter v1.0"
 #user_inputs
 inputs = (
 	("Anti Decay MCEdit Filter", "label"),
-	("This fither fixes leaves that decay.", "label"),
+	("This filter fixes leaves that decay.", "label"),
 	("By StealthyExpertX - @RedstonerLabs", "label"),
 	("Oak: ", False),
 	("Birch: ", False),
