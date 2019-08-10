@@ -1,2 +1,1 @@
-# mcedit-filters
-MCEdit V1 Filters
+These tools posted on this GitHub can be used for free for non commercial use and commercial purposes for the Minecraft Marketplace under the condition that you do not claimkj any of these as your own.
