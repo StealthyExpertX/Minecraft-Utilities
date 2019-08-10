@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<SearchReplaceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Delete All Entities</Name>
+  <Items>
+    <SearchReplaceCriteria>
+      <Name>Find entities and delete them.</Name>
+      <Active>true</Active>
+      <NodeSelector>Entities</NodeSelector>
+      <MatchType>ANY</MatchType>
+      <Conditions>
+        <MatchCondition>
+          <NodeSelector>id</NodeSelector>
+          <Condition>EXIST</Condition>
+          <Value />
+        </MatchCondition>
+        <MatchCondition>
+          <NodeSelector>identifier</NodeSelector>
+          <Condition>EXIST</Condition>
+          <Value />
+        </MatchCondition>
+      </Conditions>
+      <Values>
+        <ReplaceValue>
+          <NodeSelector>this</NodeSelector>
+          <Value>Delete</Value>
+          <NodeType>TAG_COMPOUND</NodeType>
+        </ReplaceValue>
+      </Values>
+      <Variables />
+      <Children />
+    </SearchReplaceCriteria>
+  </Items>
+  <Variables />
+</SearchReplaceGroup>

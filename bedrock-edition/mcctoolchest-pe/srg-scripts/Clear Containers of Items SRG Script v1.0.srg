@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<SearchReplaceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Clear all containers of Items SRG Script</Name>
+  <Description>This script clears all inventories of containers in the world of all entities and tileentities but not players!</Description>
+  <Items>
+    <SearchReplaceCriteria>
+      <Name>Check Containers</Name>
+      <Active>true</Active>
+      <NodeSelector />
+      <MatchType>ANY</MatchType>
+      <Conditions>
+        <MatchCondition>
+          <NodeSelector>Items</NodeSelector>
+          <Condition>EXIST</Condition>
+          <Value />
+        </MatchCondition>
+      </Conditions>
+      <Values>
+        <ReplaceValue>
+          <NodeSelector>this.Items</NodeSelector>
+          <Value>Replace</Value>
+          <NodeType>NBT_STRING</NodeType>
+        </ReplaceValue>
+      </Values>
+      <Variables>
+        <SearchReplaceVariable>
+          <Name>Replace</Name>
+          <Value>0a0001090900054974656d730a0000000000</Value>
+          <DataType>NBT_STRING</DataType>
+          <ListType>TAG_BYTE</ListType>
+        </SearchReplaceVariable>
+      </Variables>
+      <Children />
+    </SearchReplaceCriteria>
+  </Items>
+  <Variables />
+</SearchReplaceGroup>
