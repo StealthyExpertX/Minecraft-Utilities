@@ -1,6 +1,6 @@
-#*****************************************************************************#
-#Created By StealthyExpertX and also known as AKA @RedstonerLabs and iPxD Mods#
-#*****************************************************************************#
+#**************************************************************#
+#Created By StealthyExpert and also known as AKA @RedstonerLabs#
+#**************************************************************#
 
 #*********************************************************************#
 #AreaEffectCloud Filter V2.0 Creates Custom Particles & Potion Effects#
@@ -11,9 +11,9 @@
 #********************#
 from pymclevel import TAG_Byte, TAG_Int, TAG_Compound, TAG_String, TileEntity, TAG_Long, TAG_List, TAG_Short, TAG_Double, TAG_Float
 
-#*************************************************#
-#Console & pc Particles Ids List By StealthyExpert#
-#*************************************************#
+#***************************************************#
+#Console & Java Particles Ids List By StealthyExpert#
+#***************************************************#
 # 48 = fallingdust
 # 46 = damageIndicator
 # 45 = endRod
