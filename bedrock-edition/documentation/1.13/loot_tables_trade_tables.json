@@ -1,0 +1,343 @@
+//Note this is un-official Minecraft Documentation on Loot Tables & Villager Trade Functions,
+//all contributions are very much appreciated.
+
+//Note: will crash the game if your loot table has bad syntax it will crash the game when killing an entity,
+//Note: will crash the game if the trade table has bad syntax it will crash the game when loading the world or will display the trades blank.
+
+// Note: "Wants" key in trade tables does not currently accept items with functions meaning that it will display the item in trade but 
+//will accept any item that matches this item even if it's not named or enchanted or has custom lore :(.
+
+//Note: trade table behavior-component must be added in as a component group in "component groups" and not added directly in the "components",
+//or the trades will all render blank even though the json may use the correct syntax.
+
+
+//Random enchants example for loot-tables and villager trades,
+//Note: enchants will not work on items that can't be enchanted ingame, examples: Diamonds, Coal & Stone Blocks can't be enchanted,
+//but swords, axes, armor can be.
+
+//Enchant with 'levels' will use XP levels to enchant btw a range 'min' & 'max','
+
+//treasure' will increase likely hood that the enchant is op.
+"functions": [
+    {
+        "function": "enchant_with_levels",
+        "treasure": true,
+        "levels": {
+        "min": 200,
+        "max": 200
+    }
+]
+
+//Will enchant the item completely random, 'treasure' will increase likely hood that the enchant is op.
+"functions": [
+    {
+        "function": "enchant_randomly",
+        "treasure": false
+    }
+]
+
+//Will only use enchantments that can be used on gear such as looting, silktouch, mending, etc, 
+//'chance' increases likely hood that it will be enchanted at all, example: 0.5 = 50%, 1.0 = 100%.
+"functions": [
+    {
+        "function": "enchant_random_gear",
+        "chance": 0.5
+    }
+]
+
+//Will only use specific enchantments using the string ids,
+//Note: some enchantments stack and combine into others so be wary of that even though you listed them separate they may render
+//as combined enchants example, fire_protection may stack into >>> protection.
+
+//aqua_affinity - speeds up how fast you mine blocks underwater,
+//bane_of_arthropods - increases attack damage against arthropods such as spiders, silverfish, etc,
+//blast_protection - decreases blast and explosion damage,
+//channeling - summons a lightning bolt at an entity when the enchanted trident is thrown, note: the entity must be in the rain,
+//depth_strider - speeds up how fast you swim under the water,
+//efficiency - increases how fast you can mine,
+//feather_falling - decreases fall damage and teleportation damage,
+//fire_aspect - sets entity that is hit to be on fire.
+//fire_protection - decreases damage caused by fire damage and lava damage,
+//flame - makes arrows on fire so when they hit an entity it sets them on fire,
+//fortune - increase block drops from mining blocks such as gold ore, diamond ore & redstone ore, etc,
+//frost_walker - freezes water into ice blocks so you can walk on top of the ice,
+//impaling - increases attack damage against sea creatures such as squids, drowned, cod, etc,
+//infinity - allows you to shoot an infinite amount of arrows,
+//knockback - increases knockback damage against all entities, {entities will fly backwards},
+//looting - increases the loot quantity dropped when the entity is killed,
+//loyalty - returns the trident to the entity after throwing,
+//luck_of_the_sea - increases chances of catching valuable items while fishing,
+//lure - increases the chance rate of fish biting your hook from your fishing rod,
+//mending - uses the players XP to mend his or her tools, weapons and armor,
+//multishot - allows the entity to shoots 3 arrows at once but only uses 1 arrow from the entities inventory,
+//piercing - Arrow can pierce through multiple entities while flying,
+//projectile_protection - Reduces projectile damage from arrows, fireballs, tridents, etc,
+//protection - normal protection against attacks, fire, lava, and falling
+//punch - increases knockback damage against all entities with arrows, {entities will fly backwards},
+//quick_charge - decreases the amount of time it takes to reload with a crossbow.
+//respiration - increases underwater breathing & helps you see underwater better use on helmets,
+//riptide - pushes the player forward when enchanted trident is thrown while in water or when you are in the rain,
+//sharpness - increases attack damage,
+//silk_touch - mines the blocks that can't be mined under normal means example: Grass Blocks, Pathway Blocks, Ice,
+//smite - increases attack damage against undead entities like zombies, skeletons, etc,
+//thorns - causes damage to the attacking entities,
+//unbreaking - Increases the durability of an item.
+
+
+//Note: it is possible to go above vanilla enchant values II, IV, though ingame it will still display the max vanilla value.
+//Note: extremely high values may or may not crash the game, negative values have not been tested yet as another possible crash?
+"functions": [
+    {
+      "function": "specific_enchants",
+      "enchants": [
+         {
+            "id": "knockback",
+            "level":327
+         },
+         {
+            "id": "unbreaking",
+            "level": 1000
+         }
+      ]
+    }
+]
+
+//Note: you can also exclude enchant levels and have specific enchant and the game will choose the best enchant levels.
+"functions": [
+    {
+        "function": "specific_enchants",
+        "enchants": [
+            "knockback",
+            "fire_aspect"
+        ]
+    }
+]
+
+//Custom spawn eggs example for loot-tables and villager trades,
+//Note: Custom spawn eggs will not work in peaceful if the entity is a hostile entity example: creeper, skeleton, zombie, etc,
+//Note: If prefix or namespace is wrong it may or may not cause the game to crash or display the 
+//dropped spawn egg item like a black invalid spawn egg so make sure it's 100% correct before testing.
+
+//Will drop or give a custom spawn egg for a custom entity.
+//'chance' increases likely hood that it will be enchanted or not, example: 0.5 = 50%, 1.0 = 100%.
+"functions": [
+    {
+        "function": "set_actor_id",
+        "id": "prefix:namespace"
+    }
+]
+
+//Note: if "id" is omitted it should drop the custom entities spawn egg anyways! but this doesn't always work and is inconsistent with my testing.
+"functions": [
+    {
+        "function": "set_actor_id"
+    }
+]
+
+//Will drop or give a block item with a data value example: white wool is 0, black wool is 15,
+//Note: invalid values can lead to crashing or game returning an exception in some cases other cases it simply dropped white wool or orange wool.
+"functions": [
+    {
+        "function": "set_data",
+        "data": 15
+    }
+]
+
+//Will drop or give an item with a duribility also known as damage example 0.5 = 50% damaged 0.75 = 25% damaged.
+ "functions": [
+    {
+        "function": "set_damage",
+        "damage": {
+            "min": 0.5,
+            "max": 0.75
+        }
+    }
+]
+
+//Will drop or give a written book with author's name and book title & 10 pages as listed in the "pages" list,
+//Note: do not try passing the limit of text per page in the json file or the game may crash a pon dropping 
+//the book or when the player tries opening the book ingame after picking it up/collecting it.
+"functions": [
+    {
+        "function": "set_book_contents",
+        "author": "Book Autrhor",
+        "title": "Book Title",
+        "pages": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10"
+        ]
+    }
+]
+
+//Note: rawtext is supported pages to translate strings and do other cool stuff
+//see rawtext documentation for more information, https://minecraft.gamepedia.com/Bedrock_Edition_raw_JSON_text_format
+//Note: When using rawtext remember to use \ escape for special characters like " and \
+"functions": [
+    {
+        "function": "set_book_contents",
+        "author": "Book Autrhor",
+        "title": "Book Title",
+        "pages": [
+            "{\"rawtext\":[ {\"translate\":\"book.line.one\"}]}",
+            "{\"rawtext\":[ {\"translate\":\"book.line.two\"}]}",
+            "{\"rawtext\":[ {\"translate\":\"action.interact.mount\"}]}"
+         ]
+    }
+]
+
+//Will drop or give a chest block, dispenser, dropper, etc with a custom loot table.
+//Note: make sure that the loot table that this connects to is valid and has good syntax or 
+//it will crash the game either by dropping the chest or when placing/opening the chest.
+"functions": [
+    {
+        "function": "fill_container",
+        "loot_table": "loot_tables/gameplay/op_chest.json"
+    }
+]
+
+//Will drop 1 to 3 items in a range when used in "gives" in villager trades will give the player 1 to 3 items upon loading the trade initially.
+//Note: you can also set it to the same value "min" = 2 & "max" = 2 and it will drop two items.
+"functions": [
+    {
+        "function": "set_count",
+        "count": {
+            "min": 1,
+            "max": 3
+        }
+    }
+]
+
+//Will increase the dropped amount of items using the looting enchantment.
+"functions": [
+    {
+        "function": "looting_enchant",
+        "count": {
+            "min": 0,
+            "max": 1
+        }
+    }
+]
+
+
+//Will drop a smelted item's result example, beef = cooked beef, iron ore = iron ingot, etc,
+//Note: this example also shows how to access entity properties as well such as 'on_fire', 'on_ground', 
+//my theory is that this uses filters from behavior files this is untested, however.
+"functions": [
+    {
+        "function": "furnace_smelt",
+        "conditions": [
+            {
+                "condition": "entity_properties",
+                "entity": "this",
+                "properties": {
+                     "on_fire": true
+                }
+            }
+        ]
+    }
+]
+
+//Will drop a sheeps color wool based on the "minecraft:color" behavior component, for example, "minecraft:color":0 would drop white wool.
+"functions": [
+    {
+        "function": "minecraft:set_data_from_color_index"
+    }
+]
+
+//Will drop a pillager banner item,
+//Note: no idea what the other ids might be since it does not follow data values like color wool?
+"functions": [
+    {
+        "function": "set_banner_details",
+        "type": 1
+    }
+]
+
+//Will drop a map that has an X marking a location, 
+//Note: only values I could find in vanilla usage were 'monument' & 'mansion'.
+"functions": [
+    {
+        "function": "exploration_map",
+        "destination": "monument"
+    }
+]
+
+
+//Will set enchantments randomly using the players' current enchantment seed in the player.dat,
+//or local player to hoose the enchantment when initially loading the trade on the entity.
+//Note: can only be used on trades will not work on chest loot or entity drops,
+//Note: "base_cost" is the min number used when generating a range for the enchantment,
+//Note: "base_random_cost" is the max number used when generating a range for the enchantment,
+//Note: "per_level_random_cost" is the min-cost number used when generating a range and is the cost of XP needed,
+//to attach the enchantment to an item using an anvil,
+//Note: "per_level_cost" is is the max cost number used when generating a range and is the cost of XP needed,
+//to attach the enchantment to an item using an anvil.
+"functions": [
+    {
+        "function": "enchant_book_for_trading",
+        "base_cost": 2,
+        "base_random_cost": 5,
+        "per_level_random_cost": 10,
+        "per_level_cost": 3
+    }
+]
+
+//Will choose a random block state value using the 'block_state': (value) specified, example, 'coral_color', 'flower_type', 'sapling_type',
+//Note: uses the internal block state names check out this link and look at bedrock edition's block state names for the key,
+//Note: the value must always be an 'int' and can represent the internal string types in a ranged value as shown below to randomly choose a flower 
+//btw the value 0 and the value 10, https://minecraft.gamepedia.com/Block_states#Flowers
+//Note: this does not set the damage or data values on the block but instead sets the block state in NBT on the item when dropped.
+"functions": [
+    {
+        "function": "random_block_state",
+        "block_state": "flower_type",
+        "values": {
+            "min": 0,
+            "max": 10
+        }
+    }
+]
+
+//Will drop or give a block item with a data value example: white wool is 0, black wool is 15,
+//unclear what the diffrence btw 'random_aux_value' and 'set_data' is?
+"functions": [
+    {
+        "function": "random_aux_value",
+        "values": {
+            "min": 0,
+            "max": 15
+        }
+    }
+]
+
+//Will drop or give an item with custom lore on it, https://minecraft.gamepedia.com/Formatting_codes,
+//Note: you can use colored lore by using this symbol § and using a color code here's the link to the color code format,
+//the recommended amount of characters per line is 37 including spaces going past this may cause some characters to display off the screen on some devices,
+//with smaller resolutions then your average computer or game console such as Xbox one, switch, etc.
+"functions": [
+    {
+        "function": "set_lore",
+        "lore": [
+            "Line 1",
+            "Line 2",
+            "Line 3"
+        ]
+    }
+]
+
+//Will drop or give an item with a custom name, https://minecraft.gamepedia.com/Formatting_codes,
+//Note: you can use the colored name by using this symbol § and using a color code here's the link to the color code format, 
+"functions": [
+    {
+        "function": "set_name",
+        "name": "Custom Name Here!"
+    }
+]
