@@ -77,8 +77,7 @@ for lang in lang_list:
 	with io.open(lang, "w", encoding="utf-8") as output:
 
 		#Loop through each line in the clipboard and write it to the text file.
-		for line in clip_data:
-			output.write(line)
+		output.write(clip_data)
 
 	#Move language files that are generated to the "texts" folder.
 	moveFile(lang, "texts/"+lang)
